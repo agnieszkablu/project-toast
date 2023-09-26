@@ -20,7 +20,7 @@ function ToastPlayground() {
       </header>
 
       {isToastOpen && message && (
-        <Toast message={message} variant={variant} handleDismiss={setIsToastOpen} />
+        <Toast message={message} variant={variant} setIsToastOpen={setIsToastOpen} />
       )}
 
       <form
@@ -75,7 +75,7 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label} />
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            <Button onClick={setIsToastOpen}>Pop Toast!</Button>
+            <Button onClick={() => setIsToastOpen(true)}>Pop Toast!</Button>
           </div>
         </div>
       </form>

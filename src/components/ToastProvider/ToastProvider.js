@@ -7,8 +7,22 @@ function ToastProvider({ children }) {
   const [variant, setVariant] = React.useState('notice');
   const [toasts, setToasts] = React.useState([]);
 
+  function handleDismissAll() {
+    return setToasts([]);
+  }
+
   return (
-    <ToastContext.Provider value={{message, setMessage, variant, setVariant, toasts, setToasts }}>
+    <ToastContext.Provider
+      value={{
+        message,
+        setMessage,
+        variant,
+        setVariant,
+        toasts,
+        setToasts,
+        handleDismissAll
+      }}
+    >
       {children}
     </ToastContext.Provider>
   );

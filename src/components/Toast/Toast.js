@@ -22,20 +22,23 @@ function Icon({ variant, as: Tag = ICONS_BY_VARIANT[variant], ...delegated }) {
   return <Tag {...delegated} />;
 }
 
-function Toast({ variant, id , deleteToast, children }) {
-
+function Toast({ variant, id, deleteToast, children }) {
   return (
     <div id={id} className={`${styles.toast} ${styles[variant]}`}>
       <div className={styles.iconContainer}>
         <Icon variant={variant} size={24} />
       </div>
-      <p className={styles.content}>{children}</p>
+      <p className={styles.content}>
+        <VisuallyHidden>{variant}-</VisuallyHidden>
+        {children}
+      </p>
       <button
         onClick={() => deleteToast(id)}
         className={styles.closeButton}
+        aria-label='Dismiss message'
+        aria-live='off'
       >
         <X size={24} />
-        <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
     </div>
   );

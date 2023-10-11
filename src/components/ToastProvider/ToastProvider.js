@@ -7,22 +7,40 @@ function ToastProvider({ children }) {
   const [message, setMessage] = React.useState('');
   const [variant, setVariant] = React.useState('notice');
   const [toasts, setToasts] = React.useState([]);
-  
+
   const handleEscape = React.useCallback(() => {
     setToasts([]);
   }, []);
-  
+
   useEscapeKey(handleEscape);
+
+  function createToast(message, variant) {
+    const newToast = {
+      variant: variant,
+      message: message,
+      id: crypto.randomUUID(),
+    };
+
+    const nextToasts = [...toasts, newToast];
+    setToasts(nextToasts);
+  }
+
+  function deleteToast(index) {
+    const nextToasts = [...toasts];
+    nextToasts.splice(index, 1);
+    setToasts(nextToasts);
+  }
 
   return (
     <ToastContext.Provider
       value={{
+        toasts,
         message,
-        setMessage,
         variant,
         setVariant,
-        toasts,
-        setToasts,
+        setMessage,
+        createToast,
+        deleteToast
       }}
     >
       {children}

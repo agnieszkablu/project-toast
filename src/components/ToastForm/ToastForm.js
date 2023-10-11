@@ -7,23 +7,26 @@ import { ToastContext } from '../ToastProvider';
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastForm() {
-  const { toasts, message, variant, setToasts, setMessage, setVariant } =
-    React.useContext(ToastContext);
+  const {
+    message,
+    variant,
+    setMessage,
+    setVariant,
+    createToast,
+  } = React.useContext(ToastContext);
+
+  function handleCreateToast() {
+    createToast(message,variant);
+    setMessage('');
+    setVariant(VARIANT_OPTIONS[0]);
+  }
 
   return (
     <form
       className={styles.controlsWrapper}
       onSubmit={(event) => {
         event.preventDefault();
-
-        const newToast = {
-          variant: variant,
-          message: message,
-          id: crypto.randomUUID(),
-        };
-
-        const nextToasts = [...toasts, newToast];
-        setToasts(nextToasts);
+        handleCreateToast();
       }}
     >
       <div className={styles.row}>

@@ -49,20 +49,20 @@ function ToastForm() {
       <div className={styles.row}>
         <div className={styles.label}>Variant</div>
         <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-          {VARIANT_OPTIONS.map((name) => {
+          {VARIANT_OPTIONS.map((option) => {
             return (
-              <label key={`variant-${name}`} htmlFor={`variant-${name}`}>
+              <label key={`variant-${option}`} htmlFor={`variant-${option}`}>
                 <input
-                  id={`variant-${name}`}
+                  id={`variant-${option}`}
                   type='radio'
                   name='variant'
-                  value={name}
+                  value={option}
                   onChange={(event) => {
                     setVariant(event.target.value);
                   }}
-                  checked={variant === name}
+                  checked={variant === option}
                 />
-                {name}
+                {option}
               </label>
             );
           })}
